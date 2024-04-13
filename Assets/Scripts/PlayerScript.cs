@@ -8,6 +8,7 @@ public class PlayerScript : MonoBehaviour, IPlayer
 {
     public Rigidbody character;
     public Collider CharacterCollider;
+    public AudioSource AudioSource;
 
     public float moveSpeed = 0.1F;
     public int maxHealth = 1;
@@ -15,6 +16,8 @@ public class PlayerScript : MonoBehaviour, IPlayer
 
     private int currentHealth;
     private bool isOffGround = false;
+
+    private float secondsWalking = 0;
     public void ApplyDamage(int damage)
     {
         currentHealth -= damage;
@@ -58,6 +61,7 @@ public class PlayerScript : MonoBehaviour, IPlayer
     private void CheckGroundDistance()
     {
         isOffGround = !Physics.Raycast(transform.position, Vector3.down, 0.1F);
+
     }
 
     public void Move()
@@ -66,13 +70,26 @@ public class PlayerScript : MonoBehaviour, IPlayer
         {
             transform.position = transform.position + (Vector3.left * moveSpeed);
             character.transform.eulerAngles = new Vector3(0, 270, 0);
+
+            this.secondsWalking += Time.deltaTime;
         }
-
-        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
         {
-
             transform.position = transform.position + (Vector3.right * moveSpeed);
             character.transform.eulerAngles = new Vector3(0, 90, 0);
+
+            this.secondsWalking += Time.deltaTime;
+        }
+        else
+        {
+            this.secondsWalking = 0;
+        }
+
+
+        if (secondsWalking != 0 && secondsWalking > 0.4F)
+        {
+            this.PlaySound();
+            secondsWalking = 0;
         }
 
         if (Input.GetKeyDown(KeyCode.E))
@@ -83,5 +100,14 @@ public class PlayerScript : MonoBehaviour, IPlayer
             character.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOffGround = true;
         }
+
+     
+        transform.rotation = Quaternion.identity;
+    }
+
+    [ContextMenu("PlaySound")]
+    public void PlaySound()
+    {
+        this.AudioSource.Play();
     }
 }
