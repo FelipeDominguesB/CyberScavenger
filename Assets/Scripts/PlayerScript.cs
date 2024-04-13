@@ -35,6 +35,31 @@ public class PlayerScript : MonoBehaviour, IPlayer
         return GetCurrentHealth() > 0;
     }
 
+   
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        currentHealth = maxHealth;
+    }
+
+    
+    // Update is called once per frame
+    void Update()
+    {
+        if(IsAlive())
+        {
+            CheckGroundDistance();
+            Move();
+        }
+
+    }
+
+    private void CheckGroundDistance()
+    {
+        isOffGround = !Physics.Raycast(transform.position, Vector3.down, 0.1F);
+    }
+
     public void Move()
     {
         if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
@@ -45,34 +70,18 @@ public class PlayerScript : MonoBehaviour, IPlayer
 
         if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
         {
+
             transform.position = transform.position + (Vector3.right * moveSpeed);
             character.transform.eulerAngles = new Vector3(0, 90, 0);
         }
 
-        if(Input.GetKeyDown(KeyCode.Space) && !isOffGround)
+        if (Input.GetKeyDown(KeyCode.E))
+            this.ApplyDamage(1);
+
+        if (Input.GetKeyDown(KeyCode.Space) && !isOffGround)
         {
             character.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOffGround = true;
         }
-
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        currentHealth = maxHealth;
-    }
-
-
-    private void CheckGroundDistance()
-    {
-        isOffGround = !Physics.Raycast(transform.position, Vector3.down, 0.1F);
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        CheckGroundDistance();
-        Move();
-
     }
 }

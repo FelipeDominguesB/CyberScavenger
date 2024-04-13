@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class PseudoEnemy : MonoBehaviour
+public class MenuScript : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -16,9 +18,9 @@ public class PseudoEnemy : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
 
-        Debug.Log("Entrou na colisão");
+    public void LoadLevel(int level)
+    {
+        SceneManager.LoadScene(level);
     }
 }
