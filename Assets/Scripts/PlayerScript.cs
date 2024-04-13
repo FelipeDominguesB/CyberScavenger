@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.TextCore.Text;
 
 public class PlayerScript : MonoBehaviour, IPlayer
@@ -37,28 +38,34 @@ public class PlayerScript : MonoBehaviour, IPlayer
     void Update()
     {
         float xMovement = 0;
-        float yMovement = 0;
-
-        int rotationAngle = 0;
+        float rotationAngle = 0;
+        bool keyPressed = false;
 
         if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {
             xMovement -= moveSpeed;
-            rotationAngle += 180;
-
-            character.transform.position = new Vector3(character.transform.position.x + xMovement, character.transform.position.y + yMovement);
-            character.transform.eulerAngles = new Vector3(character.transform.rotation.x, character.transform.rotation.y, rotationAngle);
+            rotationAngle += 270;
+            keyPressed = true;
         }
 
         if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
         {
             xMovement += moveSpeed;
-            rotationAngle = 0;
-            character.transform.position = new Vector3(character.transform.position.x + xMovement, character.transform.position.y + yMovement);
-            character.transform.eulerAngles = new Vector3(character.transform.rotation.x, character.transform.rotation.y, rotationAngle);
+            rotationAngle = 90;
+            keyPressed = true;
         }
 
+        if(Input.GetKey(KeyCode.Space))
+        {
+            keyPressed = true;
+        }
 
+        character.transform.position = new Vector3(character.position.x + xMovement, character.position.y);
+        
+        if (keyPressed)
+            character.transform.eulerAngles = new Vector3(0, rotationAngle, 0);
+        else
+            character.transform.eulerAngles = new Vector3(0, character.transform.eulerAngles.y, 0);
 
         if (Input.GetKeyDown(KeyCode.Q))
             this.ApplyDamage(1);
