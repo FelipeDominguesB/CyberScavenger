@@ -1,12 +1,15 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelScript : MonoBehaviour
 {
 
-    public Rigidbody rigidBody;
+    public int nextLevelIndex;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -17,12 +20,18 @@ public class LevelScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rigidBody.transform.eulerAngles = new Vector3(0, rigidBody.transform.eulerAngles.y + 3, 0);
     }
 
-    private void OnTriggerEnter(Collider other)
+
+    private void RestartLevel()
     {
-        Debug.Log("Entrou");
+        SceneManager.LoadScene(this.gameObject.scene.buildIndex);
     }
+
+    public void FinishLevel()
+    {   
+        SceneManager.LoadScene(nextLevelIndex);
+    }
+
 
 }
