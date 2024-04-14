@@ -1,14 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.TextCore.Text;
 
 public class PlayerScript : MonoBehaviour, IPlayer
 {
+
     public Rigidbody character;
     public Collider CharacterCollider;
     public AudioSource AudioSource;
+    public List<AudioClip> AudioClipList;
+    public AudioClip JumpAudioClip;
+    public AudioClip LandingAudioClip;
 
     public float moveSpeed = 0.1F;
     public int maxHealth = 1;
@@ -86,9 +91,9 @@ public class PlayerScript : MonoBehaviour, IPlayer
         }
 
 
-        if (secondsWalking != 0 && secondsWalking > 0.4F)
+        if (secondsWalking != 0 && secondsWalking > 0.4F && !isOffGround)
         {
-            this.PlaySound();
+            this.PlayWalkingSound();
             secondsWalking = 0;
         }
 
@@ -102,12 +107,36 @@ public class PlayerScript : MonoBehaviour, IPlayer
         }
 
      
-        transform.rotation = Quaternion.identity;
     }
 
     [ContextMenu("PlaySound")]
-    public void PlaySound()
+    public void PlayWalkingSound()
     {
+
+        int random = Random.Range(0, 5);
+        Debug.Log(random);
+
+        AudioClip audioClip = AudioClipList.ElementAt(random);
+        AudioSource.clip = audioClip;
         this.AudioSource.Play();
+    }
+
+
+    private void PlayJumpingSound()
+    {
+        this.AudioSource.clip = LandingAudioClip;
+        this.AudioSource.Play();
+    }
+
+
+    public void OnCollisionEnter(Collision collision)
+    {
+
+        if(collision.gameObject.tag == "Floor" && isOffGround)
+        {
+            this.AudioSource.clip = LandingAudioClip;
+            this.AudioSource.Play();
+            secondsWalking = 0;
+        }
     }
 }

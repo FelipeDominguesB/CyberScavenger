@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CinemachineTarget
   - FinishLine
+  - Floor
   layers:
   - Default
   - TransparentFX
