@@ -37,8 +37,8 @@ public class PlayerScript : MonoBehaviour, IPlayer
 
     private int currentHealth;
     private bool isOffGround = false;
-
-    private float secondsWalking = 0;
+    private bool isRunning = false;
+    private float speedWhileJumping;
     public void ApplyDamage(int damage)
     {
         currentHealth -= damage;
@@ -65,6 +65,9 @@ public class PlayerScript : MonoBehaviour, IPlayer
         _animIDJump = Animator.StringToHash("Jump");
         _animIDFreeFall = Animator.StringToHash("FreeFall");
         _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
+
+        _animator.SetFloat(_animIDMotionSpeed, 1);
+
     }
 
 
@@ -96,7 +99,6 @@ public class PlayerScript : MonoBehaviour, IPlayer
         {
             _animator.SetBool(_animIDGrounded, true);
             _animator.SetBool(_animIDFreeFall, false);
-            _animator.SetBool(_animIDFreeFall, false);
             _animator.SetBool(_animIDJump, false);
         }
         else
@@ -110,31 +112,49 @@ public class PlayerScript : MonoBehaviour, IPlayer
 
     public void Move()
     {
+
+        isRunning = Input.GetKey(KeyCode.LeftShift);
+
+
+
+        float actualSpeed;
+
+        if (!isOffGround)
+            actualSpeed = isRunning ? moveSpeed * 2.5F : moveSpeed;
+        else
+            actualSpeed = speedWhileJumping;
+
         if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {
-            transform.position = transform.position + (Vector3.left * moveSpeed * Time.fixedDeltaTime);
+            transform.position = transform.position + (Vector3.left * actualSpeed * Time.fixedDeltaTime);
             character.transform.eulerAngles = new Vector3(0, 270, 0);
+
+            _animator.SetFloat(_animIDSpeed, actualSpeed);
+
+
 
         }
         else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
         {
-            transform.position = transform.position + (Vector3.right * moveSpeed * Time.fixedDeltaTime);
+            transform.position = transform.position + (Vector3.right * actualSpeed * Time.fixedDeltaTime);
             character.transform.eulerAngles = new Vector3(0, 90, 0);
+            
+            _animator.SetFloat(_animIDSpeed, actualSpeed);
+
+
 
         }
         else
         {
+            _animator.SetFloat(_animIDSpeed, 0);
+            
         }
+
 
 
         if (Input.GetKeyDown(KeyCode.E))
             this.ApplyDamage(1);
 
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            
-
-        }
         if (Input.GetKeyDown(KeyCode.X))
         {
             _animator.SetBool(_animIDFreeFall, false);
@@ -148,22 +168,13 @@ public class PlayerScript : MonoBehaviour, IPlayer
 
             character.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOffGround = true;
+            speedWhileJumping = actualSpeed;
+
+            this.AudioSource.clip = JumpAudioClip;
+            this.AudioSource.Play();
 
         }
 
-
-        //else if(isOffGround)
-        //{
-        //    _animator.SetBool(_animIDFreeFall, true);
-
-        //}
-        //else
-        //{
-        //    _animator.SetBool(_animIDGrounded, true);
-
-        //}
-
-        _animator.SetFloat(_animIDMotionSpeed, 1);
 
 
     }
@@ -195,7 +206,6 @@ public class PlayerScript : MonoBehaviour, IPlayer
 
     private void OnLand(AnimationEvent animationEvent)
     {
-        Debug.Log("Landed");
         this.isOffGround = false;
         _animator.SetBool(_animIDFreeFall, false);
         _animator.SetBool(_animIDGrounded, true);

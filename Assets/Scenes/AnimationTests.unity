@@ -260,11 +260,6 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
---- !u!95 &246072140 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 7318050812958713238, guid: 03861aee0ddd20f478229b2203092940, type: 3}
-  m_PrefabInstance: {fileID: 1612159012}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1378181969
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,53 +386,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 84667715389287544, guid: 03861aee0ddd20f478229b2203092940, type: 3}
-      propertyPath: m_Height
-      value: 18.93082
-      objectReference: {fileID: 0}
-    - target: {fileID: 84667715389287544, guid: 03861aee0ddd20f478229b2203092940, type: 3}
-      propertyPath: m_Radius
-      value: 1.9966297
-      objectReference: {fileID: 0}
-    - target: {fileID: 84667715389287544, guid: 03861aee0ddd20f478229b2203092940, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 84667715389287544, guid: 03861aee0ddd20f478229b2203092940, type: 3}
-      propertyPath: m_Center.x
-      value: 5.2221597e-15
-      objectReference: {fileID: 0}
-    - target: {fileID: 84667715389287544, guid: 03861aee0ddd20f478229b2203092940, type: 3}
-      propertyPath: m_Center.y
-      value: 9.045362
-      objectReference: {fileID: 0}
-    - target: {fileID: 84667715389287544, guid: 03861aee0ddd20f478229b2203092940, type: 3}
-      propertyPath: m_Center.z
-      value: 0.4249854
-      objectReference: {fileID: 0}
     - target: {fileID: 563296126460793541, guid: 03861aee0ddd20f478229b2203092940, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 2722677787446341866, guid: 03861aee0ddd20f478229b2203092940, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3082031917005715093, guid: 03861aee0ddd20f478229b2203092940, type: 3}
-      propertyPath: Animator
-      value: 
-      objectReference: {fileID: 246072140}
-    - target: {fileID: 5885582531487171920, guid: 03861aee0ddd20f478229b2203092940, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5885582531487171920, guid: 03861aee0ddd20f478229b2203092940, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7318050812958713238, guid: 03861aee0ddd20f478229b2203092940, type: 3}
-      propertyPath: m_CullingMode
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8140701459639173742, guid: 03861aee0ddd20f478229b2203092940, type: 3}
       propertyPath: m_LocalPosition.x

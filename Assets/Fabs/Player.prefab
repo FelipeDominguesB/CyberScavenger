@@ -123,10 +123,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1a91fcd19acf1e54bba0945d9f390849, type: 3}
   - {fileID: 8300000, guid: 14e8a8d2158bec840b56c54f5266e692, type: 3}
   - {fileID: 8300000, guid: 29841e7d5bbfb5b419c9ad16ca8bc4c1, type: 3}
-  JumpAudioClip: {fileID: 0}
+  JumpAudioClip: {fileID: 8300000, guid: ff697d3070687ce4583faa0561a145a2, type: 3}
   LandingAudioClip: {fileID: 8300000, guid: ff697d3070687ce4583faa0561a145a2, type: 3}
-  Animator: {fileID: 7318050812958713238}
-  moveSpeed: 0.1
+  moveSpeed: 2
   maxHealth: 1
   jumpForce: 400
 --- !u!54 &4893621587555817353
@@ -175,10 +174,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.5335811
-  m_Height: 18.561548
+  m_Radius: 1.9966297
+  m_Height: 18.93082
   m_Direction: 1
-  m_Center: {x: 1.1309777e-14, y: 9.23, z: 0.888034}
+  m_Center: {x: 5.2221597e-15, y: 9.045362, z: 0.4249854}
 --- !u!82 &2722677787446341866
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1432,7 +1431,7 @@ Animator:
   m_GameObject: {fileID: 5888685841442618865}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 73ffbc06802a247cfb1b26f4ee67eba8, type: 3}
-  m_Controller: {fileID: 9100000, guid: 40db3173a05ae3242b1c182a09b0a183, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
