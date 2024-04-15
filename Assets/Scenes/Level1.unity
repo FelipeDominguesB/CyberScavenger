@@ -395,33 +395,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 84667715389287544, guid: 03861aee0ddd20f478229b2203092940, type: 3}
-      propertyPath: m_Height
-      value: 18.697483
-      objectReference: {fileID: 0}
-    - target: {fileID: 84667715389287544, guid: 03861aee0ddd20f478229b2203092940, type: 3}
-      propertyPath: m_Radius
-      value: 0.6790126
-      objectReference: {fileID: 0}
-    - target: {fileID: 84667715389287544, guid: 03861aee0ddd20f478229b2203092940, type: 3}
-      propertyPath: m_Center.x
-      value: -6.214076e-15
-      objectReference: {fileID: 0}
-    - target: {fileID: 84667715389287544, guid: 03861aee0ddd20f478229b2203092940, type: 3}
-      propertyPath: m_Center.y
-      value: 9.162032
-      objectReference: {fileID: 0}
-    - target: {fileID: 84667715389287544, guid: 03861aee0ddd20f478229b2203092940, type: 3}
-      propertyPath: m_Center.z
-      value: 0.46861032
-      objectReference: {fileID: 0}
     - target: {fileID: 563296126460793541, guid: 03861aee0ddd20f478229b2203092940, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 2722677787446341866, guid: 03861aee0ddd20f478229b2203092940, type: 3}
-      propertyPath: MinDistance
-      value: 0.83759475
       objectReference: {fileID: 0}
     - target: {fileID: 8140701459639173742, guid: 03861aee0ddd20f478229b2203092940, type: 3}
       propertyPath: m_LocalPosition.x
