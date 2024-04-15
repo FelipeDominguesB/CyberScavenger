@@ -39,6 +39,7 @@ public class PlayerScript : MonoBehaviour, IPlayer
     private bool isOffGround = false;
     private bool isRunning = false;
     private float speedWhileJumping;
+    private float lastFacedAngle;
     public void ApplyDamage(int damage)
     {
         currentHealth -= damage;
@@ -77,6 +78,7 @@ public class PlayerScript : MonoBehaviour, IPlayer
         TryGetComponent(out _animator);
         currentHealth = maxHealth;
         AssignAnimationIDs();
+        lastFacedAngle = character.transform.eulerAngles.y;
     }
 
     
@@ -126,7 +128,8 @@ public class PlayerScript : MonoBehaviour, IPlayer
 
         if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {
-            transform.position = transform.position + (Vector3.left * actualSpeed * Time.fixedDeltaTime);
+            Vector3 movement = new Vector3(character.position.x - (actualSpeed * Time.fixedDeltaTime), character.position.y, 0);
+            character.MovePosition(movement); 
             character.transform.eulerAngles = new Vector3(0, 270, 0);
 
             _animator.SetFloat(_animIDSpeed, actualSpeed);
@@ -136,16 +139,18 @@ public class PlayerScript : MonoBehaviour, IPlayer
         }
         else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
         {
-            transform.position = transform.position + (Vector3.right * actualSpeed * Time.fixedDeltaTime);
+
+            Vector3 movement = new Vector3(character.position.x + (actualSpeed * Time.fixedDeltaTime), character.position.y , 0);
+            character.MovePosition(movement);
             character.transform.eulerAngles = new Vector3(0, 90, 0);
-            
+            lastFacedAngle = character.transform.eulerAngles.y;
+
             _animator.SetFloat(_animIDSpeed, actualSpeed);
-
-
 
         }
         else
         {
+            character.transform.eulerAngles = new Vector3(0, lastFacedAngle, 0);
             _animator.SetFloat(_animIDSpeed, 0);
             
         }

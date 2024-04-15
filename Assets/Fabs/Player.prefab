@@ -127,7 +127,7 @@ MonoBehaviour:
   LandingAudioClip: {fileID: 8300000, guid: ff697d3070687ce4583faa0561a145a2, type: 3}
   moveSpeed: 2
   maxHealth: 1
-  jumpForce: 400
+  jumpForce: 700
 --- !u!54 &4893621587555817353
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -136,7 +136,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 563296126460793541}
   serializedVersion: 4
-  m_Mass: 40
+  m_Mass: 70
   m_Drag: 1
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
