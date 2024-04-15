@@ -95,9 +95,9 @@ public class PlayerScript : MonoBehaviour, IPlayer
 
     private void CheckGroundDistance()
     {
-        isOffGround = !Physics.Raycast(transform.position, Vector3.down, 0.2F);
 
-        if(!isOffGround)
+        isOffGround = !Physics.Raycast(CharacterCollider.transform.position, Vector3.down, 0.2F);
+        if (!isOffGround)
         {
             _animator.SetBool(_animIDGrounded, true);
             _animator.SetBool(_animIDFreeFall, false);
@@ -131,6 +131,7 @@ public class PlayerScript : MonoBehaviour, IPlayer
             Vector3 movement = new Vector3(character.position.x - (actualSpeed * Time.fixedDeltaTime), character.position.y, 0);
             character.MovePosition(movement); 
             character.transform.eulerAngles = new Vector3(0, 270, 0);
+            lastFacedAngle = character.transform.eulerAngles.y;
 
             _animator.SetFloat(_animIDSpeed, actualSpeed);
 
@@ -155,17 +156,9 @@ public class PlayerScript : MonoBehaviour, IPlayer
             
         }
 
-
-
         if (Input.GetKeyDown(KeyCode.E))
             this.ApplyDamage(1);
 
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            _animator.SetBool(_animIDFreeFall, false);
-            _animator.SetBool(_animIDGrounded, true);
-
-        }
 
         if (Input.GetKeyDown(KeyCode.Space) && !isOffGround)
         {
@@ -179,8 +172,6 @@ public class PlayerScript : MonoBehaviour, IPlayer
             this.AudioSource.Play();
 
         }
-
-
 
     }
 
